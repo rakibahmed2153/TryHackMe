@@ -1,0 +1,59 @@
+Blog Link ~ https://cyberbangla.org/tryhackme-walkthrough-bounty-hacker/
+
+Bounty Hacker
+Room Link ~ https://tryhackme.com/room/cowboyhacker
+Deploy the machine.
+No need to answer
+
+Find open ports on the machine
+No need to answer
+
+Do nmap and get this result.
+
+nmap -A -sC -sV 10.10.34.191 -o /Downloads/ctfbd/tryhackme/rooms/BountyHacker/nmap-results.txt
+
+
+
+Who wrote the task list? 
+Ans – lin
+
+In the nmap scan finds all the open ports. After finding the ssh and ftp ports are open and no permission is given for anonymous login so it easily can connect with the ftp port. After connecting with the ftp server find that there are two files. one is task.txt and another one is locks.txt. I have gotten both the file and in my local PC, I have opened the task.txt file and got the user name who wrote the task list.
+
+ftp 10.10.34.191
+
+pass – anonymous
+
+What service can you brute force with the text file found?
+Ans – ssh
+
+There is a hint given in port 22. And I know port 22 obviously ssh port.
+
+What is the user’s password?
+Ans – RedDr4gonSynd1cat3
+
+In the locks.txt file, there is a password list. And in nmap scan, I find that there is ssh port is open and I get lin a user and list of passwords. so let’s try hydra if it could crack anything.
+
+hydra -l lin -P locks.txt ssh://10.10.50.153
+
+after using hydra it’s brute force and gets the password.
+
+user.txt?
+Ans: THM{…..}
+
+I get the password and the user and ssh port are open so I have to try ssh to connect. and I successfully get the connection. write command ls and get a user.txt file in there.
+cat user.txt and get user text flag.
+
+root.txt?
+THM{…….}
+
+After getting into the server now it’s time to become the root. So I have to use the sudo -l to check the sudo list files. and find /bin/tar. Then I go to GTFOBings website and find the tar sudo permission command.
+
+sudo tar -cf /dev/null /dev/null –checkpoint=1 –checkpoint-action=exec=/bin/sh
+
+use that command successfully get root permission
+
+then let’s find the root.txt. I have used the find command
+
+find / -name ‘root.txt’ 2>/dev/null
+
+After finding the root.txt file I have used the cat command and get the root flag.
