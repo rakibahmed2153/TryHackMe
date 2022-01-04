@@ -1,0 +1,33 @@
+
+Official Link ~ https://cyberbangla.org/tryhackme-walkthrough-cyberbangla-steg-ctf-2021/
+
+CyberBangla Steg CTF 2021
+Room Link ~ https://tryhackme.com/room/cyberbanglastegctf2021
+
+Task 1 – Still Water Runs Deep
+Find an audio file from the given link. And in the question, there is a hint of  “Deep”. So maybe deep sound software help to crack something. So I have used the deep sound and find a text file. In the file, there is a text and the text is a ciphertext needed to decrypt it. So I have used the cipher analyzer to analyze the cipher. And it analyzed lots of ciphers I started tey one by one. In base 58, I got something that seems a little bit suspicious to so copy that text and try with caesar cipher and in the 13 shift, I got a plain text, and that’s the flag.
+
+
+
+Task 2 – It’s all about the image
+In this task, I have got a zip file. And the file is password protected. There are no hints given to crack the password. So I take helps from john the ripper tools and the rockyou wordlist. I have used the following commands.
+
+john.zip2john Steganography.zip > myhash.txt
+
+john myhash.txt –wordlist=rockyou.txt
+
+After that, I got an image and the image is not opening because its formate is given as png but I have checked it is a jpg image. I have changed the format and found it is a star image. Then I have checked the metadata and strings of the image. Then I thought it is a jpg image so I can use steghide I don’t have any password so I just hit enter don’t give any password and it gave me a hidden.txt file. In the file, there is again a binary num, some base64 data. So used cybercafe to auto decode the cipher.  Cybercafe auto decodes the binary and gives another cipher text. In the hidden.txt there is two base64 code, by decoding that I have got two five. So it’s maybe vigenery cipher and code is five I have tried lots of them but can’t decode it the first time. Then I notice there is double five and affine cipher takes two numbers I give there 5 and 5 and I got a plain text. And that is the flag.
+
+
+Task 3 – Funny Songs
+hints – My Youtube Channel Name is :CyberTeach360
+
+I have got a wav file. First I start with deep sound tools and there I get a haha image and pass_info.txt file. In the pass_info.txt there is a hint given. Need to go to questioners youtube channel and find out the 1k+ viewed video and collect the topic’s names and make a wordlist to crack haha image. I have collected the topic’s name and cracked the image and got another file and a ciphertext. Then I start analyzing it and after a lot of try I found it is a base85. So I have used cybercafe and decode the cipher text and got the flag.
+
+
+Task 4 – I love to listen to re-mix song
+I got a wav file again. Again I tried deep sound but this time I didn’t find anything there. Then I used the sonic visualizer tool and upload the file there. After that, I have found a two-wave. I have intersected both of the waves through Add Spectrogram. And I have got plain text. That is the flag.
+
+
+Task 5 – Need to improve your VISUALIZATION OR you will be in danger.
+I have got two files one is chipered.png and a secrect.png. And there is a hint OR in the question. So I have to use the xor tool to intersect both of the images and get an image of an animal and the animal name is the flag.
